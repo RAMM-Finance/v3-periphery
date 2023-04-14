@@ -3,6 +3,12 @@ import '@nomiclabs/hardhat-etherscan'
 import '@nomiclabs/hardhat-waffle'
 import 'hardhat-typechain'
 import 'hardhat-watcher'
+import * as dotenv from 'dotenv';
+
+dotenv.config()
+
+const key = process.env.PRIVATE_KEY ? process.env.PRIVATE_KEY : "0x0000000000000000000000000000000000000000000000000000000000000000";
+
 
 const LOW_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.7.6',
@@ -50,6 +56,14 @@ export default {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: false,
+    },
+    mumbai: {
+      url: "https://matic-mumbai.chainstacklabs.com",
+      accounts: [key],
+      chainId: 80001,
+      allowUnlimitedContractSize: true,
+      live: true,
+      gas: 20000000,
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
