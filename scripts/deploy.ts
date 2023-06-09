@@ -37,7 +37,7 @@ async function main() {
     const [owner] = await ethers.getSigners();
     // console.log("Owner address:", owner.address)
     const weth = "0x4648a43B2C14Da09FdF82B161150d3F634f40491"
-    let factory = "0x6e79176DE8C5838579BDACbD5784Fa1dd399A5Bb"
+    let factory = "0x40C4dF3D787C1A50938Fde499f52e2Ec7717a2fa"
 
     let NFTDescriptor_F = new ContractFactory(NFTDescriptor.abi, NFTDescriptor.bytecode, owner);
     let nftDescriptor = await NFTDescriptor_F.deploy();
@@ -72,10 +72,16 @@ async function main() {
 
     await writeFile('addresses.json', JSON.stringify(addresses, null, 2));
 
-    console.log('NFT_DESCRIPTOR_ADDRESS=', `'${nftDescriptor.address}'`)
-    console.log('POSITION_DESCRIPTOR_ADDRESS=', `'${nonfungibleTokenPositionDescriptor.address}'`)
-    console.log('POSITION_MANAGER_ADDRESS=', `'${nonfungiblePositionManager.address}'`)
-    console.log('QUOTER_V2_ADDRESS=', `'${quoterV2.address}'`)
+    // console.log('NFT_DESCRIPTOR_ADDRESS=', `'${nftDescriptor.address}'`)
+    // console.log('POSITION_DESCRIPTOR_ADDRESS=', `'${nonfungibleTokenPositionDescriptor.address}'`)
+    // console.log('POSITION_MANAGER_ADDRESS=', `'${nonfungiblePositionManager.address}'`)
+    // console.log('QUOTER_V2_ADDRESS=', `'${quoterV2.address}'`)
+    console.log(
+        `
+        export const PS_QUOTER_V2 = '${quoterV2.address}'
+        export const PS_NONFUNGIBLE_POSITION_MANAGER = '${nonfungiblePositionManager.address}'
+        `
+    )
 }
 
 /*
